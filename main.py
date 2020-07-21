@@ -1,23 +1,22 @@
 # Core Pkgs
-import streamlit as st 
+import streamlit as st
 
 # EDA Pkgs
-import pandas as pd 
-import numpy as np 
-
+import pandas as pd
+import numpy as np
 
 # Data Viz Pkg
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use("Agg")
-import seaborn as sns 
+import seaborn as sns
 
 
 
 def main():
 	"""Semi Automated ML App with Streamlit """
 
-	activities = ["EDA","Plots"]	
+	activities = ["EDA","Plots"]
 	choice = st.sidebar.selectbox("Select Activities",activities)
 
 	if choice == 'EDA':
@@ -27,7 +26,7 @@ def main():
 		if data is not None:
 			df = pd.read_csv(data)
 			st.dataframe(df.head())
-			
+
 
 			if st.checkbox("Show Shape"):
 				st.write(df.shape)
@@ -76,7 +75,7 @@ def main():
 			if st.checkbox("Show Value Counts"):
 				st.write(df.iloc[:,-1].value_counts().plot(kind='bar'))
 				st.pyplot()
-		
+
 			# Customizable Plot
 
 			all_columns_names = df.columns.tolist()
@@ -99,12 +98,12 @@ def main():
 					cust_data = df[selected_columns_names]
 					st.line_chart(cust_data)
 
-				# Custom Plot 
+				# Custom Plot
 				elif type_of_plot:
 					cust_plot= df[selected_columns_names].plot(kind=type_of_plot)
 					st.write(cust_plot)
 					st.pyplot()
-    
+
 
 
 if __name__ == '__main__':
